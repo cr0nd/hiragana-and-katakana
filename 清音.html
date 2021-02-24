@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    #japaneseword-display {
+        font-size: 180px;
+    }
+
+    .center-only {
+        text-align: center;
+    }
+
+    #next {
+        font-size: 30px;
+        width: 140px;
+        height: 60px;
+    }
+    #kill {
+        font-size: 30px;
+        width: 140px;
+        height: 60px;
+    }
+    #read {
+        font-size: 30px;
+        width: 140px;
+        height: 60px;
+    }
+
+    .pad {
+        margin: 100px auto;
+        border: black solid 2px;
+        width: 340px;
+        height: 550px;
+        padding: 30px;
+        vertical-align: middle;
+        border-radius: 20px;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Japanese Study Easy</title>
+    <script>
+        //发音，调用API
+        function doTTS(strs){
+			var ttsDiv = document.getElementById('bdtts_div_id');
+			var ttsAudio = document.getElementById('tts_autio_id');
+			var ttsText = strs;
+
+			ttsDiv.removeChild(ttsAudio);
+			var au1 = '<audio id="tts_autio_id" autoplay="autoplay">';
+			var sss = '<source id="tts_source_id" src="http://tts.baidu.com/text2audio?lan=jp&ie=UTF-8&spd=1&text='+ttsText+'" type="audio/mpeg">';
+			var eee = '<embed id="tts_embed_id" height="0" width="0" src="">';
+			var au2 = '</audio>';
+			ttsDiv.innerHTML = au1 + sss + eee + au2;
+
+			ttsAudio = document.getElementById('tts_autio_id');
+
+			ttsAudio.play();
+		}
+    </script>
+    <script>
+        Array.prototype.shuffle = function () {
+            var array = this;
+            var m = array.length,
+                t, i;
+            while (m) {
+                i = Math.floor(Math.random() * m--);
+                t = array[m];
+                array[m] = array[i];
+                array[i] = t;
+            }
+            return array; 
+        }   //数组洗牌
+        //初始化-----------------------------------
+        p=-1;
+        words = "";
+        words += "かカきキくクけケこコさサしシすスせセそソたタちチつツてテとトなナにニぬヌねネのノはハひヒふフへヘほホまマみミむムめメもモやヤゆユよヨらラりリるルれレろロわワをヲんン";
+        //清音表
+        //words += "がガぎギぐグげゲごゴざザじジずズぜゼぞゾだダぢヂづヅでデどドばバびビぶブべベぼボぱパぴピぷプぺペぽポ";
+        //浊音半浊音表
+        resetword = new Array();
+        for (i = 0; i < words.length; i++) {
+            resetword.push(words[i]);
+        }  
+        //-----------------------------------------
+    
+        nextword = function (k) {
+            x = document.getElementById("japaneseword-display");
+            if (x.innerHTML != "&nbsp;" && k==1){
+                resetword.push(t);
+            }
+            if (p==-1) {
+                arr = new Array();
+                p = resetword.length;
+                for (i = 0; i < p; i++) {
+                    arr.push(resetword[i]);
+                }
+                arr.shuffle();
+                resetword = new Array();
+            }
+            p = p - 1;
+            if (p==-1) {
+                document.getElementById("next").innerHTML = "start";
+                x.innerHTML = "&nbsp;";
+            } else {
+                document.getElementById("next").innerHTML = p+1;           //有倒数
+                t = arr.pop();
+                x.innerHTML = t;
+            }
+        }
+
+        //发音函数
+        readword = function () {
+            const t = document.getElementById("japaneseword-display").innerHTML;
+            doTTS(t);
+        }
+    </script>
+</head>
+
+<body>
+    <div class="pad center-only">
+        <div>&nbsp;</div>
+        <div id="japaneseword-display" class="center-only">&nbsp;</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div class="center-only"><button id="next" onclick="javascript:nextword(1)">start</button></div>
+        <div>&nbsp;</div>
+        <div class="center-only"><button id="kill" onclick="javascript:nextword(0)">⚔</button></div>
+        <div>&nbsp;</div>
+        <div class="center-only"><button id="read" onclick="javascript:readword()">📢</button></div>
+        <div>&nbsp;</div>
+        <div id="bdtts_div_id">
+            <audio id="tts_autio_id" autoplay="autoplay">
+				<source id="tts_source_id" src="http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=9&text=播报内容" type="audio/mpeg">
+				<embed id="tts_embed_id" height="0" width="0" src="">
+			</audio>
+		</div>
+    </div>
+</body>
+<script>
+    
+</script>
+
+</html>
