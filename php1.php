@@ -1,2 +1,2 @@
 <?php
-  phpinfo();
+  echo "that's good!"  
