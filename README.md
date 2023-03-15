@@ -1,17 +1,17 @@
-# 平假名片假名随机认读
-  
-  每次点击都会弹出一个平假名或者片假名。
-  
-  弹出后如果记得就可以按中间的按钮其斩掉。
-  
-  不认得则可以点击数字，那么一个循环后其会重新出现。
-  
-  点击播放按钮可以弹出其声音。
+# hiragana-and-katakana random
 
-# 使用说明
+A hiragana or katakana will pop up every time you click.
 
-一次弹出一个假名。
+After it pops up, you can press the middle button to cut it off if you remember it.
 
-类似记单词的模式，可以选择“下次再记、过、播放声音三种动作”。
+If you don’t recognize it, you can click on the number and it will reappear after a cycle.
 
-播放声音在可以在JavaScript中更改src指向的url来调节。
+Clicking on the play button will pop out its sound.
+
+# Instructions
+
+One kana pops up at a time.
+
+Similar to memorizing words mode, you can choose “Remember next time, pass, play sound three actions”.
+
+The sound playback can be adjusted by changing the url pointed to by src in JavaScript.
